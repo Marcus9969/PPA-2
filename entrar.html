@@ -17,7 +17,7 @@
 
         <div class="numsei">
 
-            <form id="formLogin" onsubmit="return validarLogin(event)">
+            <form id="formLogin" onsubmit="return" method="post" action="entrar.php" >
                 <input class="form-input" type="text" placeholder="Nome" required>
                 <input class="form-input" type="password" placeholder="Senha" required>
     
@@ -29,29 +29,4 @@
 
     
 </body>
-<script>
-function validarLogin(event) {
-    event.preventDefault();
-    
-    const inputs = document.querySelectorAll('#formLogin input');
-    let todosPreenchidos = true;
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            input.classList.add('erro');
-            todosPreenchidos = false;
-        } else {
-            input.classList.remove('erro');
-        }
-    });
-    
-    if (todosPreenchidos) {
-        window.location.href = 'index.html';
-    } else {
-        alert('Por favor, preencha todos os campos!');
-    }
-    
-    return false;
-}
-</script>
 </html>
