@@ -47,5 +47,6 @@
        }
 }
 
-$fulano = New cadastrado();
-$fulano->imprimir();
+$newuser = New cadastrado();
+$newuser->EnviarParaBD();
+$newuser->imprimir();
