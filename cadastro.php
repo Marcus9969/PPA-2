@@ -27,9 +27,12 @@
 
 <h1 class="o">Bem-Vindo ao Prato cheio</h1>
     <div class="numsei">
+            
         <h1>Cadastrado com sucesso</h1>
 
         <h2>Bem vindo ' .$this->nome. '</h2>
+
+        <form id="formCadastro" action="index.html">
             <button type="submit" class="cada">Continuar</button>
         </form>
 
@@ -40,7 +43,7 @@
         }
 
        public function EnviarParaBD(){
-        //kauanny, por favor coloque aqui o codigo para enviar os dados deste arquivo para o BD
+        //aqui vai o codigo que envia os dados de cadastro para o BD
        }
 }
 
