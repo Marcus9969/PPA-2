@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilizacao.css">
+    <title>Doação</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <img class="blue" src="Captura de tela de 2025-02-12 00-12-14.png" alt="">
+
+    <header>
+        <img class="in" src="Prato_Cheio2-removebg-preview.png" alt=""> Prato Cheio
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="modal" id="modal">
+        <h3>Escolha um valor</h3>
+        <div class="opcoes-valores">
+            <div class="valor-opcao" data-value="50">R$ 50,00</div>
+            <div class="valor-opcao" data-value="100">R$ 100,00</div>
+            <div class="valor-opcao" data-value="200">R$ 200,00</div>
+            <div class="valor-opcao" data-value="500">R$ 500,00</div>
+        </div>
+        <button class="fechar" id="fechar">Fechar</button>
+    </div>
+
+    <div class="robson">
+        <div class="valores">
+            <input type="radio" name="valor" id="val1">
+            <label for="val1" class="val">R$ 10,00</label>
+
+            <input type="radio" name="valor" id="val2">
+            <label for="val2" class="val">R$ 20,00</label>
+
+            <input type="radio" name="valor" id="val3">
+            <label for="val3" class="val" id="outroValor">Outro valor</label>
+        </div>
+
+
+    <div class="opcoes">
+        <input type="radio" name="tipo" id="ind">
+        <label for="ind" class="individual">
+            <span>Individual</span>
+        </label>
+
+        <input type="radio" name="tipo" id="men">
+        <label for="men" class="mensal">
+            <span>Mensal</span>
+        </label>
+    </div>
+
+
+    <input class="form-input" type="text" placeholder="Nome">
+    <input class="form-input" type="text" placeholder="Sobrenome">
+    <input class="form-input" type="number" placeholder="CPF">
+    <input class="form-input" type="text" placeholder="Email">
+    <input class="form-input" type="number" placeholder="Número">
+
+        <div class="botoes">
+            <a href="main.html"> <button class="voltar">Voltar</button></a>
+            <button class="doar">Doar</button>
+        </div>
+    </div>
+
+    <div class="modal-doacao" id="modalDoacao">
+        <div class="modal-content">
+            <h2>Faça sua doação</h2>
+            
+            <div class="item-doacao">
+                <img src="cesta-basica.png" alt="Cesta Básica">
+                <div class="item-info">
+                    <span>Cesta básica</span>
+                    <div class="quantidade-controle">
+                        <button class="btn-qtd minus">-</button>
+                        <input type="number" value="0" min="0" class="qtd-input">
+                        <button class="btn-qtd plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-doacao">
+                <img src="alimentos.png" alt="Alimentos">
+                <div class="item-info">
+                    <span>Alimentos não perecíveis</span>
+                    <div class="quantidade-controle">
+                        <button class="btn-qtd minus">-</button>
+                        <input type="number" value="0" min="0" class="qtd-input">
+                        <button class="btn-qtd plus">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-doacao">
+                <img src="alimentos.png" alt="Alimentos">
+                <div class="item-info">
+                    <span>Marmitas e lanches</span>
+                    <div class="quantidade-controle">
+                        <button class="btn-qtd minus">-</button>
+                        <input type="number" value="0" min="0" class="qtd-input">
+                        <button class="btn-qtd plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="botoes-modal">
+                <button class="btn-cancelar">Cancelar</button>
+                <button class="btn-confirmar" onclick="window.location.href='main.html'">Confirmar Doação</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("outroValor").addEventListener("click", function() {
+            document.getElementById("modal").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        });
+
+        document.getElementById("fechar").addEventListener("click", function() {
+            document.getElementById("modal").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        });
+
+        document.querySelectorAll(".valor-opcao").forEach(item => {
+            item.addEventListener("click", function() {
+                let valorSelecionado = this.getAttribute("data-value");
+                alert("Você vai doar R$ " + valorSelecionado + "!!!!");
+                document.getElementById("modal").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            });
+        });
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('click', function() {
+                if (this.checked) {
+                    let wasChecked = this.getAttribute('data-was-checked') === 'true';
+                    if (wasChecked) {
+                        this.checked = false;
+                        this.setAttribute('data-was-checked', 'false');
+                    } else {
+                        document.querySelectorAll('input[type="radio"]').forEach(r => {
+                            r.setAttribute('data-was-checked', 'false');
+                        });
+                        this.setAttribute('data-was-checked', 'true');
+                    }
+                }
+            });
+        });
+
+        // Adicione este script
+document.querySelector('.doar').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('modalDoacao').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+});
+
+document.querySelector('.btn-cancelar').addEventListener('click', function() {
+    document.getElementById('modalDoacao').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+});
+
+// Controle de quantidade
+document.querySelectorAll('.btn-qtd').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const input = this.parentElement.querySelector('.qtd-input');
+        const currentValue = parseInt(input.value) || 0;
+        
+        if (this.classList.contains('plus')) {
+            input.value = currentValue + 1;
+        } else if (this.classList.contains('minus') && currentValue > 0) {
+            input.value = currentValue - 1;
+        }
+    });
+});
+
+// Formatação do input de dinheiro
+document.querySelector('.input-dinheiro').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    value = (parseInt(value) / 100).toFixed(2);
+    e.target.value = value;
+});
+    </script>
+</body>
+</html>

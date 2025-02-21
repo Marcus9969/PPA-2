@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Cadastro</title>
+</head>
+<body>
+<img  class="blue" src="Captura de tela de 2025-02-12 00-12-14.png" alt="">
+    <h2 class="o">Bem-Vindo de volta ao Prato cheio</h2>
+
+    <div class="numsei">
+
+        <div class="numsei">
+
+            <form id="formLogin" onsubmit="return validarLogin(event)">
+                <input class="form-input" type="text" placeholder="Nome" required>
+                <input class="form-input" type="password" placeholder="Senha" required>
+    
+                <button type="submit" class="cada">Entrar</button>
+            </form>
+    
+            <img class="logi" src="Prato_Cheio2-removebg-preview.png" alt="">
+        </div>
+
+    
+</body>
+<script>
+function validarLogin(event) {
+    event.preventDefault();
+    
+    const inputs = document.querySelectorAll('#formLogin input');
+    let todosPreenchidos = true;
+    
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            input.classList.add('erro');
+            todosPreenchidos = false;
+        } else {
+            input.classList.remove('erro');
+        }
+    });
+    
+    if (todosPreenchidos) {
+        window.location.href = 'main.html';
+    } else {
+        alert('Por favor, preencha todos os campos!');
+    }
+    
+    return false;
+}
+</script>
+</html>

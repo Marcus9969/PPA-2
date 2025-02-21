@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prato Cheio</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon-96x96-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="logo.png" alt="Prato Cheio Logo">
+        </div>
+        <div class="nav-links">
+            <span class="pontos-display">Seus Pontos: 0</span>
+            <button class="nav-btn" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
+            <button class="nav-btn login" onclick="window.location.href='entrar.html'"">Entrar</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <section class="destaque">
+
+        </section>
+
+        <section class="missao">
+            <h2>NOSSA MISSÃO</h2>
+            <div class="missao-texto">
+                <p>Distribuímos refeições nutritivas para quem mais precisa, contando com nossa rede de voluntários comprometidos e organizações unidas por uma causa.</p>
+            </div>
+            
+            <div class="missao-cards">
+                <div class="missao-card">
+                    <h3>COMBATE À FOME</h3>
+                    <p class="card-subtitle">Doação</p>
+                    <p class="card-info">Já distribuímos mais de 10.000 refeições</p>
+                </div>
+                
+                <div class="missao-card">
+                    <h3>VOLUNTARIADO</h3>
+                    <p class="card-subtitle">Voluntários</p>
+                    <p class="card-info">+500 voluntários ativos</p>
+                </div>
+                
+                <div class="missao-card">
+                    <h3>PARCERIAS</h3>
+                    <p class="card-subtitle">Parcerias</p>
+                    <p class="card-info">30 organizações parceiras</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="noticias">
+            <div class="noticias-container">
+                <button class="slide-btn prev">&#10094;</button>
+                <div class="noticias-content">
+                    <div class="noticia-item">
+                        <img src="Imagem colada.png" alt="Notícia 1">
+                    </div>
+                    <div class="noticia-item">
+                        <img src="noticia2.png" alt="Notícia 2">
+                    </div>
+                    <div class="noticia-item">
+                        <img src="noticia3.png" alt="Notícia 3">
+                    </div>
+                    <div class="noticia-item">
+                        <img src="noticia4.png" alt="Notícia 4">
+                    </div>
+                    <div class="noticia-item">
+                        <img src="noticia5.png" alt="Notícia 5">
+                    </div>
+                </div>
+                <button class="slide-btn next">&#10095;</button>
+            </div>
+        </section>
+
+        <section class="cards-container">
+            <div class="card">
+                <img src="doe.png" alt="Doe Alimentos">
+                <h2>Doe Alimentos</h2>
+                <p>Faça a diferença na vida de alguém hoje!</p>
+                <button class="card-btn" onclick="window.location.href='doa.html'">Doe Agora</button>
+            </div>
+
+            <div class="card">
+                <img src="voluntario.png" alt="Seja Voluntário">
+                <h2>Seja Voluntário</h2>
+                <p>Junte-se a nós nessa causa!</p>
+                <button class="card-btn" onclick="abrirModalVoluntario()">Seja Voluntário</button>
+            </div>
+
+            <div class="card">
+                <img src="pontos.png" alt="Seus Pontos">
+                <h2>Sistema de Pontos</h2>
+                <p>Doe e acumule pontos para trocar por prêmios!</p>
+                <button class="card-btn" onclick="abrirModalPontos()">Ver Prêmios</button>
+            </div>
+        </section>
+
+        <section class="doe-container">
+            <div class="doe-section">
+                <div class="doe-texto">
+                    <h2>FAÇA SUA DOAÇÃO</h2>
+                    <p>Para a doação de alimentos podem trazer à nossa sede, marcar um ponto de encontro ou pedir um motoboy para entregar</p>
+                </div>
+                
+                <div class="doe-layout">
+                    <img src="Captura de tela de 2025-02-18 16-31-08.png" alt="Doe Alimentos" class="doe-img">
+                    
+                    <div class="card">
+                        <img src="doe.png" alt="Doe Alimentos">
+                        <h2>Doe Alimentos</h2>
+                        <p>Faça a diferença na vida de alguém hoje!</p>
+                        <button class="card-btn" onclick="window.location.href='doa.html'">Doe Agora</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sobre">
+            <h2>CONTATE-NOS</h2>
+            <hr>
+            <div class="sobre-cards">
+                <!-- Grupo de Contatos -->
+                <div class="contatos-grupo">
+                    <h2>Contatos</h2>
+                    <div class="contato-item">
+                        <i class="fas fa-phone"></i>
+                        Número: +55 77 9969-9363
+                    </div>
+                    <div class="contato-item">
+                        <i class="fas fa-envelope"></i>
+                        Email: Pratocheio@gmail.com
+                    </div>
+                    <div class="contato-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Endereço: Rua das Flores, 69 - Bairro Jardim das Flores, Brumado, Bahia
+                    </div>
+                </div>
+                
+                <div class="redes-grupo">
+                    <h2>Rede Social</h2>
+                    <a href="https://www.instagram.com/prato_cheio/">
+                        <i class="fab fa-instagram"></i>
+                        Instagram
+                    </a>
+                    <a href="https://www.facebook.com/prato.cheio">
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </a>
+                    <a href="https://www.tiktok.com/@prato_cheio">
+                        <i class="fab fa-tiktok"></i>
+                        TikTok
+                    </a>
+                </div>
+
+                <!-- Grupo de Idealizadores -->
+                <div class="idealizadores">
+                    <h2>Idealizadores</h2>
+                    <p>Alisson Pedro</p>
+                    <p>Cristian Walter</p>
+                    <p>Giovana Pessoa</p>
+                    <p>Kauanny Oliveira</p>
+                    <p>Livia Novais</p>
+                    <p>Marcus Antonio</p>
+                    <p>Viviane de Jesus</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal do Voluntário (só aparece quando clicar no botão) -->
+    <div id="modalVoluntario" class="modal">
+        <div class="modal-content">
+            <span class="fechar">&times;</span>
+            <h2>Seja um Voluntário</h2>
+            <form id="formVoluntario">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" name="nome" required placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required placeholder="seu.email@exemplo.com">
+                </div>
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="tel" name="telefone" required placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label>Disponibilidade</label>
+                    <select name="disponibilidade" required>
+                        <option value="">Selecione sua disponibilidade</option>
+                        <option value="manha">Manhã</option>
+                        <option value="tarde">Tarde</option>
+                        <option value="noite">Noite</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-destaque">QUERO AJUDAR!</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="secret-button" style="position: fixed; bottom: 10px; right: 10px; width: 20px; height: 20px; cursor: pointer;"></div>
+
+    <div id="video-container" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999;">
+        <video id="secret-video" style="width: 100%; height: 100%; object-fit: cover;">
+            <source src="É O BRAZINO, JOGO DA GALERA🔥🤑.mp4" type="video/mp4">
+        </video>
+        <button id="close-video" style="position: absolute; top: 20px; right: 20px; background: red; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 18px; border-radius: 5px; z-index: 10000;">X</button>
+    </div>
+
+    <!-- Adicione isso no final do body, antes do script -->
+    <div id="modalPontos" class="modal">
+        <div class="modal-content">
+            <span class="fechar">&times;</span>
+            <h2>Sistema de Pontos</h2>
+            <div class="pontos-lista">
+                <div class="ponto-item" data-pontos="100" data-id="alimentos2kg">
+                    <div class="ponto-info">
+                        <h3>2kg de Alimentos</h3>
+                        <p>Doe alimentos não perecíveis</p>
+                    </div>
+                    <div class="ponto-valor">
+                        <i class="fas fa-star"></i>
+                        <span>100 pontos</span>
+                    </div>
+                </div>
+                
+                <div class="ponto-item" data-pontos="300" data-id="alimentos5kg">
+                    <div class="ponto-info">
+                        <h3>5kg de Alimentos</h3>
+                        <p>Doe alimentos não perecíveis</p>
+                    </div>
+                    <div class="ponto-valor">
+                        <i class="fas fa-star"></i>
+                        <span>300 pontos</span>
+                    </div>
+                </div>
+                
+                <div class="ponto-item" data-pontos="500" data-id="voluntariado">
+                    <div class="ponto-info">
+                        <h3>Voluntariado</h3>
+                        <p>4 horas de trabalho voluntário</p>
+                    </div>
+                    <div class="ponto-valor">
+                        <i class="fas fa-star"></i>
+                        <span>500 pontos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modalVoluntario = document.getElementById("modalVoluntario");
+        const btnFechar = document.getElementsByClassName("fechar")[0];
+
+        function abrirModalVoluntario() {
+            modalVoluntario.style.display = "block";
+            setTimeout(() => {
+                modalVoluntario.classList.add('active');
+            }, 10);
+        }
+
+        btnFechar.onclick = function() {
+            modalVoluntario.classList.remove('active');
+            setTimeout(() => {
+                modalVoluntario.style.display = "none";
+            }, 300);
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalVoluntario) {
+                modalVoluntario.classList.remove('active');
+                setTimeout(() => {
+                    modalVoluntario.style.display = "none";
+                }, 300);
+            }
+        }
+
+        document.getElementById('formVoluntario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            // Debug dos dados do form
+            console.log('Dados enviados:');
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+            
+            fetch('salvar_voluntario.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Resposta do PHP:', data); // Debug
+                if(data.includes('error')) {
+                    console.error('Erro retornado:', data); // Debug do erro
+                    alert('Erro ao cadastrar: ' + data);
+                } else {
+                    console.log('Sucesso!'); // Debug do sucesso
+                    alert('Cadastro realizado com sucesso!');
+                    modalVoluntario.style.display = "none";
+                    this.reset();
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição:', error); // Debug detalhado
+                alert('Erro ao cadastrar!');
+            });
+        });
+
+        // Remove o header fixo (já que agora temos a sidebar)
+        document.querySelector('header')?.remove();
+
+        const content = document.querySelector('.noticias-content');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const items = document.querySelectorAll('.noticia-item');
+        let currentIndex = 0;
+        let intervalId;
+
+        // Função para passar pro próximo slide
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % items.length; // Volta pro início quando chega no fim
+            updateSlide();
+        }
+
+        // Função para voltar pro slide anterior
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length; // Vai pro último quando tá no início
+            updateSlide();
+        }
+
+        // Função pra atualizar o slide atual
+        function updateSlide() {
+            content.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Atualiza classe active
+            items.forEach(item => item.classList.remove('active'));
+            items[currentIndex].classList.add('active');
+        }
+
+        // Inicia o carrossel automático
+        function startAutoSlide() {
+            intervalId = setInterval(nextSlide, 3000); 
+        }
+
+
+        function stopAutoSlide() {
+            clearInterval(intervalId);
+        }
+
+        nextBtn.addEventListener('click', () => {
+            stopAutoSlide();
+            nextSlide();
+            startAutoSlide();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            stopAutoSlide();
+            prevSlide();
+            startAutoSlide();
+        });
+
+        content.addEventListener('mouseenter', stopAutoSlide);
+        
+        content.addEventListener('mouseleave', startAutoSlide);
+
+
+        startAutoSlide();
+
+        const secretButton = document.getElementById('secret-button');
+        const videoContainer = document.getElementById('video-container');
+        const secretVideo = document.getElementById('secret-video');
+        const closeVideo = document.getElementById('close-video');
+        let clickCount = 0;
+        let lastClick = 0;
+
+        secretButton.addEventListener('click', () => {
+            const now = Date.now();
+            if (now - lastClick > 1000) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+            }
+            lastClick = now;
+
+            if (clickCount === 3) {
+                videoContainer.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                secretVideo.play();  // Começa a tocar automaticamente
+                
+                // Animação de crescimento
+                videoContainer.style.transform = 'scale(0)';
+                videoContainer.style.transition = 'transform 0.5s ease-out';
+                setTimeout(() => {
+                    videoContainer.style.transform = 'scale(1)';
+                }, 50);
+            }
+        });
+
+        closeVideo.addEventListener('click', () => {
+            // Animação de encolhimento
+            videoContainer.style.transform = 'scale(0)';
+            
+            setTimeout(() => {
+                videoContainer.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                secretVideo.pause();
+                secretVideo.currentTime = 0;  // Volta pro início
+                videoContainer.style.transform = 'scale(1)';
+            }, 500);
+        });
+
+
+        secretVideo.style.width = '100vw';
+        secretVideo.style.height = '100vh';
+        secretVideo.style.objectFit = 'cover';
+
+        function abrirModalPontos() {
+            const modal = document.getElementById("modalPontos");
+            modal.style.display = "block";
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+        
+        document.querySelector('[onclick="abrirModalPontos()"]').onclick = function(e) {
+            e.preventDefault();
+            abrirModalPontos();
+        }
+
+        // Fechar o modal
+        document.querySelector('#modalPontos .fechar').onclick = function() {
+            const modal = document.getElementById("modalPontos");
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 300);
+        }
+
+        // Fechar quando clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById("modalPontos");
+            if (event.target == modal) {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modal.style.display = "none";
+                }, 300);
+            }
+        }
+
+        // Inicializa os pontos do localStorage ou começa com 0
+        let pontosTotal = parseInt(localStorage.getItem('pontosTotal')) || 0;
+        atualizarPontosDisplay();
+
+        document.querySelectorAll('.ponto-item').forEach(item => {
+            let ultimoClique = 0;
+            
+            item.addEventListener('click', function() {
+                // Se já estiver concluído, não faz nada
+                if (this.classList.contains('concluido')) {
+                    return;
+                }
+                
+                const agora = new Date().getTime();
+                
+                // Verifica se é um clique duplo
+                if (agora - ultimoClique < 300) {
+                    // Adiciona classe de concluído
+                    this.classList.add('concluido');
+                    
+                    // Adiciona os pontos
+                    const pontos = parseInt(this.dataset.pontos);
+                    pontosTotal += pontos;
+                    
+                    // Salva no localStorage
+                    localStorage.setItem('pontosTotal', pontosTotal);
+                    
+                    // Pega a referência do display de pontos
+                    const pontosDisplay = document.querySelector('.pontos-display');
+                    
+                    // Cria elemento de animação flutuante
+                    const pontosVoadores = document.createElement('div');
+                    pontosVoadores.textContent = `+${pontos}`;
+                    pontosVoadores.style.cssText = `
+                        position: fixed;
+                        left: ${this.getBoundingClientRect().left}px;
+                        top: ${this.getBoundingClientRect().top}px;
+                        color: #4caf50;
+                        font-weight: bold;
+                        font-size: 20px;
+                        pointer-events: none;
+                        z-index: 1000;
+                        transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+                    `;
+                    
+                    document.body.appendChild(pontosVoadores);
+                    
+                    // Força um reflow
+                    pontosVoadores.getBoundingClientRect();
+                    
+                    // Anima até o display de pontos
+                    const displayRect = pontosDisplay.getBoundingClientRect();
+                    pontosVoadores.style.transform = `translate(
+                        ${displayRect.left - pontosVoadores.getBoundingClientRect().left}px,
+                        ${displayRect.top - pontosVoadores.getBoundingClientRect().top}px
+                    )`;
+                    pontosVoadores.style.opacity = '0';
+                    
+                    // Remove o elemento após a animação
+                    setTimeout(() => {
+                        pontosVoadores.remove();
+                        // Atualiza o display com animação
+                        atualizarPontosDisplay();
+                        animarPontos();
+                    }, 800);
+                    
+                    // Salva que esta tarefa foi concluída
+                    const tarefasCompletas = JSON.parse(localStorage.getItem('tarefasCompletas') || '[]');
+                    tarefasCompletas.push(this.dataset.id);
+                    localStorage.setItem('tarefasCompletas', JSON.stringify(tarefasCompletas));
+                }
+                ultimoClique = agora;
+            });
+        });
+
+        // Função pra atualizar o display de pontos
+        function atualizarPontosDisplay() {
+            const pontosDisplay = document.querySelector('.pontos-display');
+            pontosDisplay.textContent = `Seus Pontos: ${pontosTotal}`;
+        }
+
+        // Função pra animar quando ganhar pontos
+        function animarPontos() {
+            const pontosDisplay = document.querySelector('.pontos-display');
+            pontosDisplay.classList.add('update');
+            setTimeout(() => {
+                pontosDisplay.classList.remove('update');
+            }, 500);
+        }
+
+        // Carrega o estado das tarefas completas ao abrir o modal
+        function carregarTarefasCompletas() {
+            const tarefasCompletas = JSON.parse(localStorage.getItem('tarefasCompletas') || '[]');
+            tarefasCompletas.forEach(id => {
+                const item = document.querySelector(`[data-id="${id}"]`);
+                if (item) item.classList.add('concluido');
+            });
+        }
+
+        // Carrega as tarefas completas quando a página carrega
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarTarefasCompletas();
+            atualizarPontosDisplay();
+        });
+
+        // Array com diferentes missões possíveis
+        const missoesPossiveis = [
+            {
+                id: 'alimentos2kg',
+                titulo: '2kg de Alimentos',
+                descricao: 'Doe alimentos não perecíveis',
+                pontos: 100
+            },
+            {
+                id: 'alimentos5kg',
+                titulo: '5kg de Alimentos',
+                descricao: 'Doe alimentos não perecíveis',
+                pontos: 300
+            },
+            {
+                id: 'voluntariado4h',
+                titulo: 'Voluntariado',
+                descricao: '4 horas de trabalho voluntário',
+                pontos: 500
+            },
+            {
+                id: 'roupas',
+                titulo: 'Doação de Roupas',
+                descricao: 'Doe roupas em bom estado',
+                pontos: 200
+            },
+            {
+                id: 'material',
+                titulo: 'Material Escolar',
+                descricao: 'Doe material escolar novo',
+                pontos: 150
+            },
+            {
+                id: 'cesta',
+                titulo: 'Cesta Básica',
+                descricao: 'Doe uma cesta básica completa',
+                pontos: 400
+            }
+        ];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Função pra gerar HTML das missões
+        function gerarMissoes() {
+            // Limpa os pontos e tarefas completadas
+            localStorage.removeItem('pontosTotal');
+            localStorage.removeItem('tarefasCompletas');
+            pontosTotal = 0;
+            atualizarPontosDisplay();
+
+            // Pega 3 missões aleatórias
+            const missoesAtuais = shuffleArray([...missoesPossiveis]).slice(0, 3);
+            
+            // Gera o HTML
+            const pontosLista = document.querySelector('.pontos-lista');
+            pontosLista.innerHTML = missoesAtuais.map(missao => `
+                <div class="ponto-item" data-pontos="${missao.pontos}" data-id="${missao.id}">
+                    <div class="ponto-info">
+                        <h3>${missao.titulo}</h3>
+                        <p>${missao.descricao}</p>
+                    </div>
+                    <div class="ponto-valor">
+                        <i class="fas fa-star"></i>
+                        <span>${missao.pontos} pontos</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Reaplica os event listeners
+            aplicarEventListeners();
+        }
+
+        // Função pra aplicar event listeners nas novas missões
+        function aplicarEventListeners() {
+            document.querySelectorAll('.ponto-item').forEach(item => {
+                let ultimoClique = 0;
+                
+                item.addEventListener('click', function() {
+                    if (this.classList.contains('concluido')) return;
+                    
+                    const agora = new Date().getTime();
+                    
+                    if (agora - ultimoClique < 300) {
+                        this.classList.add('concluido');
+                        
+                        const pontos = parseInt(this.dataset.pontos);
+                        pontosTotal += pontos;
+                        
+                        localStorage.setItem('pontosTotal', pontosTotal);
+                        
+                        const pontosDisplay = document.querySelector('.pontos-display');
+                        
+                        const pontosVoadores = document.createElement('div');
+                        pontosVoadores.textContent = `+${pontos}`;
+                        pontosVoadores.style.cssText = `
+                            position: fixed;
+                            left: ${this.getBoundingClientRect().left}px;
+                            top: ${this.getBoundingClientRect().top}px;
+                            color: #4caf50;
+                            font-weight: bold;
+                            font-size: 20px;
+                            pointer-events: none;
+                            z-index: 1000;
+                            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+                        `;
+                        
+                        document.body.appendChild(pontosVoadores);
+                        pontosVoadores.getBoundingClientRect();
+                        
+                        const displayRect = pontosDisplay.getBoundingClientRect();
+                        pontosVoadores.style.transform = `translate(
+                            ${displayRect.left - pontosVoadores.getBoundingClientRect().left}px,
+                            ${displayRect.top - pontosVoadores.getBoundingClientRect().top}px
+                        )`;
+                        pontosVoadores.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            pontosVoadores.remove();
+                            atualizarPontosDisplay();
+                            animarPontos();
+                        }, 800);
+                        
+                        const tarefasCompletas = JSON.parse(localStorage.getItem('tarefasCompletas') || '[]');
+                        tarefasCompletas.push(this.dataset.id);
+                        localStorage.setItem('tarefasCompletas', JSON.stringify(tarefasCompletas));
+                    }
+                    ultimoClique = agora;
+                });
+            });
+        }
+
+        // Gera novas missões quando a página carrega
+        document.addEventListener('DOMContentLoaded', gerarMissoes);
+
+        // Atualiza missões quando recarregar a página
+        window.addEventListener('beforeunload', () => {
+            localStorage.removeItem('pontosTotal');
+            localStorage.removeItem('tarefasCompletas');
+        });
+
+    </script>
+
+   
+</body>
+</html>

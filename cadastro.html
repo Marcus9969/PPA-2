@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Cadastro</title>
+</head>
+<body>
+<img  class="blue" src="Captura de tela de 2025-02-12 00-12-14.png" alt="">
+
+<h1 class="o">Bem-Vindo ao Prato cheio</h1>
+    <div class="numsei">
+
+        <form id="formCadastro" onsubmit="return validarCadastro(event)">
+            <input class="form-input" type="text" placeholder="Nome" required>
+            <input class="form-input" type="password" placeholder="Senha" required>
+            <input class="form-input" type="number" placeholder="CPF" required>
+            <input class="form-input" type="number" placeholder="Número" required>
+
+            <button type="submit" class="cada">Cadastrar</button>
+        </form>
+
+        <img class="logi" src="Prato_Cheio2-removebg-preview.png" alt="">
+    </div>
+
+
+    <script>
+
+
+        // Função pra coleta as informações do cadastros
+        function carregarCadastros() {
+            fetch('buscar_cadastros.php')
+            .then(response => response.json())
+            .then(data => {
+                const tabela = document.getElementById('tabela-cadastros');
+                let html = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Disponibilidade</th>
+                                <th>Data Cadastro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                data.forEach(cadastro => {
+                    const data = new Date(cadastro.data_cadastro).toLocaleDateString('pt-BR');
+                    html += `
+                        <tr>
+                            <td>${cadastro.nome}</td>
+                            <td>${cadastro.email}</td>
+                            <td>${cadastro.telefone}</td>
+                            <td>${cadastro.disponibilidade}</td>
+                            <td>${data}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `</tbody></table>`;
+                tabela.innerHTML = html;
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+
+        carregarCadastros();
+
+        function validarCadastro(event) {
+            event.preventDefault();
+            
+            const inputs = document.querySelectorAll('#formCadastro input');
+            let todosPreenchidos = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('erro');
+                    todosPreenchidos = false;
+                } else {
+                    input.classList.remove('erro');
+                }
+            });
+            
+            if (todosPreenchidos) {
+                window.location.href = 'main.html';
+            } else {
+                alert('Por favor, preencha todos os campos!');
+            }
+            
+            return false;
+        }
+    </script>
+
+</body>
+</html>
