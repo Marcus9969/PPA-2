@@ -35,7 +35,7 @@ if($trylogin->TryLogin()){
     <title>Cadastro</title>
 </head>
 <body>
-<img  class="blue" src="Captura de tela de 2025-02-12 00-12-14.png" alt="">
+<img  class="blue" src="imgs/Captura de tela de 2025-02-12 00-12-14.png" alt="">
     <h2 class="o">Bem-Vindo de volta ao Prato cheio</h2>
 
     <div class="numsei">
@@ -47,7 +47,7 @@ if($trylogin->TryLogin()){
                 <button type="submit" class="cada">Tentar novamente</button>
             </form>
     
-            <img class="logi" src="Prato_Cheio2-removebg-preview.png" alt="">
+            <img class="logi" src="imgs/Prato_Cheio2-removebg-preview.png" alt="">
         </div>
 
     
