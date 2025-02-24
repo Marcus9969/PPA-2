@@ -77,4 +77,3 @@ class cadastrado {
 $newuser = new cadastrado();
 $newuser->EnviarParaBD();
 $newuser->imprimir();
-?>
