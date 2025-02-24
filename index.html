@@ -21,7 +21,7 @@
         <div class="nav-links">
             <span class="pontos-display">Seus Pontos: 0</span>
             <button class="nav-btn" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
-            <button class="nav-btn login" onclick="window.location.href='entrar.html'"">Entrar</button>
+            <button class="nav-btn login" onclick="window.location.href='entrar.html'">Entrar</button>
         </div>
     </nav>
 
@@ -168,7 +168,7 @@
                     <p>Giovana Pessoa</p>
                     <p>Kauanny Oliveira</p>
                     <p>Livia Novais</p>
-                    <a href="https://pt.wikipedia.org/wiki/Clipe">Marcus Antonio</a>
+                    <p>Marcus Antonio</p>
                     <p>Viviane de Jesus</p>
                 </div>
             </div>
@@ -211,7 +211,7 @@
     <!-- Adicione isso no final do body, antes do script -->
     <div id="modalPontos" class="modal">
         <div class="modal-content">
-            <span class="fechar">&times;</span>
+            <span class="fechar" onclick="fecharModalPontos()">&times;</span>
             <h2>Sistema de Pontos</h2>
             <div class="pontos-lista">
                 <div class="ponto-item" data-pontos="100" data-id="alimentos2kg">
@@ -371,36 +371,6 @@
 
         startAutoSlide();
 
-        const secretButton = document.getElementById('secret-button');
-        const videoContainer = document.getElementById('video-container');
-        const secretVideo = document.getElementById('secret-video');
-        const closeVideo = document.getElementById('close-video');
-        let clickCount = 0;
-        let lastClick = 0;
-
-        secretButton.addEventListener('click', () => {
-            const now = Date.now();
-            if (now - lastClick > 1000) {
-                clickCount = 1;
-            } else {
-                clickCount++;
-            }
-            lastClick = now;
-
-            if (clickCount === 3) {
-                videoContainer.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-                secretVideo.play();  // Começa a tocar automaticamente
-                
-                // Animação de crescimento
-                videoContainer.style.transform = 'scale(0)';
-                videoContainer.style.transition = 'transform 0.5s ease-out';
-                setTimeout(() => {
-                    videoContainer.style.transform = 'scale(1)';
-                }, 50);
-            }
-        });
-
         closeVideo.addEventListener('click', () => {
             // Animação de encolhimento
             videoContainer.style.transform = 'scale(0)';
@@ -432,8 +402,8 @@
             abrirModalPontos();
         }
 
-        // Fechar o modal
-        document.querySelector('#modalPontos .fechar').onclick = function() {
+        // Função pra fechar o modal
+        function fecharModalPontos() {
             const modal = document.getElementById("modalPontos");
             modal.classList.remove('active');
             setTimeout(() => {
@@ -445,10 +415,7 @@
         window.onclick = function(event) {
             const modal = document.getElementById("modalPontos");
             if (event.target == modal) {
-                modal.classList.remove('active');
-                setTimeout(() => {
-                    modal.style.display = "none";
-                }, 300);
+                fecharModalPontos();
             }
         }
 
@@ -457,73 +424,61 @@
         atualizarPontosDisplay();
 
         document.querySelectorAll('.ponto-item').forEach(item => {
-            let ultimoClique = 0;
-            
             item.addEventListener('click', function() {
                 // Se já estiver concluído, não faz nada
                 if (this.classList.contains('concluido')) {
                     return;
                 }
                 
-                const agora = new Date().getTime();
+                // Adiciona classe de concluído
+                this.classList.add('concluido');
                 
-                // Verifica se é um clique duplo
-                if (agora - ultimoClique < 300) {
-                    // Adiciona classe de concluído
-                    this.classList.add('concluido');
-                    
-                    // Adiciona os pontos
-                    const pontos = parseInt(this.dataset.pontos);
-                    pontosTotal += pontos;
-                    
-                    // Salva no localStorage
-                    localStorage.setItem('pontosTotal', pontosTotal);
-                    
-                    // Pega a referência do display de pontos
-                    const pontosDisplay = document.querySelector('.pontos-display');
-                    
-                    // Cria elemento de animação flutuante
-                    const pontosVoadores = document.createElement('div');
-                    pontosVoadores.textContent = `+${pontos}`;
-                    pontosVoadores.style.cssText = `
-                        position: fixed;
-                        left: ${this.getBoundingClientRect().left}px;
-                        top: ${this.getBoundingClientRect().top}px;
-                        color: #4caf50;
-                        font-weight: bold;
-                        font-size: 20px;
-                        pointer-events: none;
-                        z-index: 1000;
-                        transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-                    `;
-                    
-                    document.body.appendChild(pontosVoadores);
-                    
-                    // Força um reflow
-                    pontosVoadores.getBoundingClientRect();
-                    
-                    // Anima até o display de pontos
-                    const displayRect = pontosDisplay.getBoundingClientRect();
-                    pontosVoadores.style.transform = `translate(
-                        ${displayRect.left - pontosVoadores.getBoundingClientRect().left}px,
-                        ${displayRect.top - pontosVoadores.getBoundingClientRect().top}px
-                    )`;
-                    pontosVoadores.style.opacity = '0';
-                    
-                    // Remove o elemento após a animação
-                    setTimeout(() => {
-                        pontosVoadores.remove();
-                        // Atualiza o display com animação
-                        atualizarPontosDisplay();
-                        animarPontos();
-                    }, 800);
-                    
-                    // Salva que esta tarefa foi concluída
-                    const tarefasCompletas = JSON.parse(localStorage.getItem('tarefasCompletas') || '[]');
-                    tarefasCompletas.push(this.dataset.id);
-                    localStorage.setItem('tarefasCompletas', JSON.stringify(tarefasCompletas));
-                }
-                ultimoClique = agora;
+                // Adiciona os pontos
+                const pontos = parseInt(this.dataset.pontos);
+                pontosTotal += pontos;
+                
+                // Salva no localStorage
+                localStorage.setItem('pontosTotal', pontosTotal);
+                
+                // Pega a referência do display de pontos
+                const pontosDisplay = document.querySelector('.pontos-display');
+                
+                // Cria elemento de animação flutuante
+                const pontosVoadores = document.createElement('div');
+                pontosVoadores.textContent = `+${pontos}`;
+                pontosVoadores.style.cssText = `
+                    position: fixed;
+                    left: ${this.getBoundingClientRect().left}px;
+                    top: ${this.getBoundingClientRect().top}px;
+                    color: #4caf50;
+                    font-weight: bold;
+                    font-size: 20px;
+                    pointer-events: none;
+                    z-index: 1000;
+                    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+                `;
+                
+                document.body.appendChild(pontosVoadores);
+                pontosVoadores.getBoundingClientRect();
+                
+                const displayRect = pontosDisplay.getBoundingClientRect();
+                pontosVoadores.style.transform = `translate(
+                    ${displayRect.left - pontosVoadores.getBoundingClientRect().left}px,
+                    ${displayRect.top - pontosVoadores.getBoundingClientRect().top}px
+                )`;
+                pontosVoadores.style.opacity = '0';
+                
+                // Remove o elemento após a animação
+                setTimeout(() => {
+                    pontosVoadores.remove();
+                    atualizarPontosDisplay();
+                    animarPontos();
+                }, 800);
+                
+                // Salva que esta tarefa foi concluída
+                const tarefasCompletas = JSON.parse(localStorage.getItem('tarefasCompletas') || '[]');
+                tarefasCompletas.push(this.dataset.id);
+                localStorage.setItem('tarefasCompletas', JSON.stringify(tarefasCompletas));
             });
         });
 
@@ -605,18 +560,79 @@
             return array;
         }
 
-        // Função pra gerar HTML das missões
-        function gerarMissoes() {
-            // Limpa os pontos e tarefas completadas
-            localStorage.removeItem('pontosTotal');
-            localStorage.removeItem('tarefasCompletas');
-            pontosTotal = 0;
-            atualizarPontosDisplay();
+        function aplicarEventListeners() {
+            document.querySelectorAll('.ponto-item').forEach(item => {
+                // Remove listeners antigos pra não duplicar
+                item.replaceWith(item.cloneNode(true));
+                
+                // Pega o elemento atualizado
+                const novoItem = document.querySelector(`[data-id="${item.dataset.id}"]`);
+                
+                novoItem.addEventListener('click', function() {
+                    // Se já tiver completado, nem continua
+                    if (this.classList.contains('concluido')) {
+                        return;
+                    }
+                    
+                    // Marca como concluído
+                    this.classList.add('concluido');
+                    
+                    // Calcula os pontos
+                    const pontos = parseInt(this.dataset.pontos);
+                    pontosTotal += pontos;
+                    localStorage.setItem('pontosTotal', pontosTotal);
+                    
+                    // Animação dos pontos voadores
+                    const pontosDisplay = document.querySelector('.pontos-display');
+                    const pontosVoadores = document.createElement('div');
+                    pontosVoadores.textContent = `+${pontos}`;
+                    pontosVoadores.style.cssText = `
+                        position: fixed;
+                        left: ${this.getBoundingClientRect().left}px;
+                        top: ${this.getBoundingClientRect().top}px;
+                        color: #4caf50;
+                        font-weight: bold;
+                        font-size: 20px;
+                        pointer-events: none;
+                        z-index: 1000;
+                        transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+                    `;
+                    
+                    document.body.appendChild(pontosVoadores);
+                    pontosVoadores.getBoundingClientRect();
+                    
+                    const displayRect = pontosDisplay.getBoundingClientRect();
+                    pontosVoadores.style.transform = `translate(
+                        ${displayRect.left - pontosVoadores.getBoundingClientRect().left}px,
+                        ${displayRect.top - pontosVoadores.getBoundingClientRect().top}px
+                    )`;
+                    pontosVoadores.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        pontosVoadores.remove();
+                        atualizarPontosDisplay();
+                        animarPontos();
+                    }, 800);
+                    
+                    // Salva a missão completada
+                    const tarefasCompletas = JSON.parse(localStorage.getItem('tarefasCompletas') || '[]');
+                    tarefasCompletas.push(this.dataset.id);
+                    localStorage.setItem('tarefasCompletas', JSON.stringify(tarefasCompletas));
+                });
+            });
+        }
 
-            // Pega 3 missões aleatórias
+        // Atualiza a função de gerar missões
+        function gerarMissoes() {
+            // Reseta os pontos só quando gerar novas missões
+            if (!localStorage.getItem('pontosTotal')) {
+                pontosTotal = 0;
+                localStorage.setItem('pontosTotal', '0');
+                localStorage.removeItem('tarefasCompletas');
+            }
+            
             const missoesAtuais = shuffleArray([...missoesPossiveis]).slice(0, 3);
             
-            // Gera o HTML
             const pontosLista = document.querySelector('.pontos-lista');
             pontosLista.innerHTML = missoesAtuais.map(missao => `
                 <div class="ponto-item" data-pontos="${missao.pontos}" data-id="${missao.id}">
@@ -631,67 +647,8 @@
                 </div>
             `).join('');
 
-            // Reaplica os event listeners
             aplicarEventListeners();
-        }
-
-        // Função pra aplicar event listeners nas novas missões
-        function aplicarEventListeners() {
-            document.querySelectorAll('.ponto-item').forEach(item => {
-                let ultimoClique = 0;
-                
-                item.addEventListener('click', function() {
-                    if (this.classList.contains('concluido')) return;
-                    
-                    const agora = new Date().getTime();
-                    
-                    if (agora - ultimoClique < 300) {
-                        this.classList.add('concluido');
-                        
-                        const pontos = parseInt(this.dataset.pontos);
-                        pontosTotal += pontos;
-                        
-                        localStorage.setItem('pontosTotal', pontosTotal);
-                        
-                        const pontosDisplay = document.querySelector('.pontos-display');
-                        
-                        const pontosVoadores = document.createElement('div');
-                        pontosVoadores.textContent = `+${pontos}`;
-                        pontosVoadores.style.cssText = `
-                            position: fixed;
-                            left: ${this.getBoundingClientRect().left}px;
-                            top: ${this.getBoundingClientRect().top}px;
-                            color: #4caf50;
-                            font-weight: bold;
-                            font-size: 20px;
-                            pointer-events: none;
-                            z-index: 1000;
-                            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-                        `;
-                        
-                        document.body.appendChild(pontosVoadores);
-                        pontosVoadores.getBoundingClientRect();
-                        
-                        const displayRect = pontosDisplay.getBoundingClientRect();
-                        pontosVoadores.style.transform = `translate(
-                            ${displayRect.left - pontosVoadores.getBoundingClientRect().left}px,
-                            ${displayRect.top - pontosVoadores.getBoundingClientRect().top}px
-                        )`;
-                        pontosVoadores.style.opacity = '0';
-                        
-                        setTimeout(() => {
-                            pontosVoadores.remove();
-                            atualizarPontosDisplay();
-                            animarPontos();
-                        }, 800);
-                        
-                        const tarefasCompletas = JSON.parse(localStorage.getItem('tarefasCompletas') || '[]');
-                        tarefasCompletas.push(this.dataset.id);
-                        localStorage.setItem('tarefasCompletas', JSON.stringify(tarefasCompletas));
-                    }
-                    ultimoClique = agora;
-                });
-            });
+            carregarTarefasCompletas();
         }
 
         // Gera novas missões quando a página carrega

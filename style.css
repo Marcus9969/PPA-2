@@ -553,13 +553,13 @@ section {
 }
 
 .doe-section {
-    max-width: 1500px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
 .doe-texto {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 1%;
     left: 30%;
 }
 
@@ -586,8 +586,8 @@ section {
 .doe-img {
     position: relative;
     bottom: 100px;
-    width: 360px;
-    height: 400px;
+    width: 27%;
+    height: 20%;
     object-fit: cover;
 }
 
@@ -703,7 +703,7 @@ section {
 }
 
 /* Responsivo */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .sidebar {
         width: 100%;
         height: auto;
