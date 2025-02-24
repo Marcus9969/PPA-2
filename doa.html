@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilizacao.css">
     <title>Doação</title>
-    <style>
-
-    </style>
 </head>
 <body>
 
@@ -18,54 +15,56 @@
     </header>
 
     <div class="overlay" id="overlay"></div>
-
+    
     <div class="modal" id="modal">
         <h3>Escolha um valor</h3>
-        <div class="opcoes-valores">
-            <div class="valor-opcao" data-value="50">R$ 50,00</div>
-            <div class="valor-opcao" data-value="100">R$ 100,00</div>
-            <div class="valor-opcao" data-value="200">R$ 200,00</div>
-            <div class="valor-opcao" data-value="500">R$ 500,00</div>
-        </div>
-        <button class="fechar" id="fechar">Fechar</button>
+        <form method="POST" action="doacao.php">
+            <div class="opcoes-valores">
+                <div class="valor-opcao" data-value="50">R$ 50,00</div>
+                <div class="valor-opcao" data-value="100">R$ 100,00</div>
+                <div class="valor-opcao" data-value="200">R$ 200,00</div>
+                <div class="valor-opcao" data-value="500">R$ 500,00</div>
+            </div>
+            <button class="fechar" id="fechar">Fechar</button>
+        </form>
     </div>
 
     <div class="robson">
-        <div class="valores">
-            <input type="radio" name="valor" id="val1">
-            <label for="val1" class="val">R$ 10,00</label>
+        <form method="POST" action="process.php">
+            <div class="valores">
+                <input type="radio" name="valor" id="val1" value="10">
+                <label for="val1" class="val">R$ 10,00</label>
 
-            <input type="radio" name="valor" id="val2">
-            <label for="val2" class="val">R$ 20,00</label>
+                <input type="radio" name="valor" id="val2" value="20">
+                <label for="val2" class="val">R$ 20,00</label>
 
-            <input type="radio" name="valor" id="val3">
-            <label for="val3" class="val" id="outroValor">Outro valor</label>
-        </div>
+                <input type="radio" name="valor" id="val3" value="outro">
+                <label for="val3" class="val" id="outroValor">Outro valor</label>
+            </div>
 
+            <div class="opcoes">
+                <input type="radio" name="tipo" id="ind" value="individual">
+                <label for="ind" class="individual">
+                    <span>Individual</span>
+                </label>
 
-    <div class="opcoes">
-        <input type="radio" name="tipo" id="ind">
-        <label for="ind" class="individual">
-            <span>Individual</span>
-        </label>
+                <input type="radio" name="tipo" id="men" value="mensal">
+                <label for="men" class="mensal">
+                    <span>Mensal</span>
+                </label>
+            </div>
 
-        <input type="radio" name="tipo" id="men">
-        <label for="men" class="mensal">
-            <span>Mensal</span>
-        </label>
-    </div>
+            <input class="form-input" type="text" name="nome" placeholder="Nome">
+            <input class="form-input" type="text" name="sobrenome" placeholder="Sobrenome">
+            <input class="form-input" type="number" name="cpf" placeholder="CPF">
+            <input class="form-input" type="text" name="email" placeholder="Email">
+            <input class="form-input" type="number" name="numero" placeholder="Número">
 
-
-    <input class="form-input" type="text" placeholder="Nome">
-    <input class="form-input" type="text" placeholder="Sobrenome">
-    <input class="form-input" type="number" placeholder="CPF">
-    <input class="form-input" type="text" placeholder="Email">
-    <input class="form-input" type="number" placeholder="Número">
-
-        <div class="botoes">
-            <a href="index.html"> <button class="voltar">Voltar</button></a>
-            <button class="doar">Doar</button>
-        </div>
+            <div class="botoes">
+                <a href="index.html"> <button class="voltar">Voltar</button></a>
+                <button type="submit" class="doar">Doar</button>
+            </div>
+        </form>
     </div>
 
     <div class="modal-doacao" id="modalDoacao">
@@ -78,7 +77,7 @@
                     <span>Cesta básica</span>
                     <div class="quantidade-controle">
                         <button class="btn-qtd minus">-</button>
-                        <input type="number" value="0" min="0" class="qtd-input">
+                        <input type="number" name="cesta_basica" value="0" min="0" class="qtd-input">
                         <button class="btn-qtd plus">+</button>
                     </div>
                 </div>
@@ -90,7 +89,7 @@
                     <span>Alimentos não perecíveis</span>
                     <div class="quantidade-controle">
                         <button class="btn-qtd minus">-</button>
-                        <input type="number" value="0" min="0" class="qtd-input">
+                        <input type="number" name="alimentos" value="0" min="0" class="qtd-input">
                         <button class="btn-qtd plus">+</button>
                     </div>
                 </div>
@@ -102,14 +101,14 @@
                     <span>Marmitas e lanches</span>
                     <div class="quantidade-controle">
                         <button class="btn-qtd minus">-</button>
-                        <input type="number" value="0" min="0" class="qtd-input">
+                        <input type="number" name="marmitas" value="0" min="0" class="qtd-input">
                         <button class="btn-qtd plus">+</button>
                     </div>
                 </div>
             </div>
             <div class="botoes-modal">
                 <button class="btn-cancelar">Cancelar</button>
-                <button class="btn-confirmar" onclick="window.location.href='index.html'">Confirmar Doação</button>
+                <button type="submit" class="btn-confirmar" onclick="window.location.href='index.html'">Confirmar Doação</button>
             </div>
         </div>
     </div>
@@ -152,37 +151,37 @@
         });
 
         // Adicione este script
-document.querySelector('.doar').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('modalDoacao').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-});
+        document.querySelector('.doar').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('modalDoacao').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
 
-document.querySelector('.btn-cancelar').addEventListener('click', function() {
-    document.getElementById('modalDoacao').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-});
+        document.querySelector('.btn-cancelar').addEventListener('click', function() {
+            document.getElementById('modalDoacao').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
 
-// Controle de quantidade
-document.querySelectorAll('.btn-qtd').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const input = this.parentElement.querySelector('.qtd-input');
-        const currentValue = parseInt(input.value) || 0;
-        
-        if (this.classList.contains('plus')) {
-            input.value = currentValue + 1;
-        } else if (this.classList.contains('minus') && currentValue > 0) {
-            input.value = currentValue - 1;
-        }
-    });
-});
+        // Controle de quantidade
+        document.querySelectorAll('.btn-qtd').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('.qtd-input');
+                const currentValue = parseInt(input.value) || 0;
+                
+                if (this.classList.contains('plus')) {
+                    input.value = currentValue + 1;
+                } else if (this.classList.contains('minus') && currentValue > 0) {
+                    input.value = currentValue - 1;
+                }
+            });
+        });
 
-// Formatação do input de dinheiro
-document.querySelector('.input-dinheiro').addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, '');
-    value = (parseInt(value) / 100).toFixed(2);
-    e.target.value = value;
-});
+        // Formatação do input de dinheiro
+        document.querySelector('.input-dinheiro').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = (parseInt(value) / 100).toFixed(2);
+            e.target.value = value;
+        });
     </script>
 </body>
 </html>
