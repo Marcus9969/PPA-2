@@ -1,4 +1,6 @@
 <?php
+
+
 class cadastrado {
     protected $nome;
     protected $cpf;

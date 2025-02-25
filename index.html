@@ -83,21 +83,18 @@
 
         <section class="cards-container">
             <div class="card">
-                <img src="doe.png" alt="Doe Alimentos">
                 <h2>Doe Alimentos</h2>
                 <p>Faça a diferença na vida de alguém hoje!</p>
                 <button class="card-btn" onclick="window.location.href='doa.html'">Doe Agora</button>
             </div>
 
             <div class="card">
-                <img src="imgs/voluntario.png" alt="Seja Voluntário">
                 <h2>Seja Voluntário</h2>
                 <p>Junte-se a nós nessa causa!</p>
                 <button class="card-btn" onclick="abrirModalVoluntario()">Seja Voluntário</button>
             </div>
 
             <div class="card">
-                <img src="imgs/pontos.png" alt="Seus Pontos">
                 <h2>Sistema de Pontos</h2>
                 <p>Doe e acumule pontos para trocar por prêmios!</p>
                 <button class="card-btn" onclick="abrirModalPontos()">Ver Prêmios</button>
@@ -114,7 +111,6 @@
                 <div class="doe-layout">
                     <img src="imgs/Captura de tela de 2025-02-18 16-31-08.jpeg" alt="Doe Alimentos" class="doe-img">
                     <div class="card">
-                        <img src="imgs/doe.png" alt="Doe Alimentos">
                         <h2>Doe Alimentos</h2>
                         <p>Faça a diferença na vida de alguém hoje!</p>
                         <button class="card-btn" onclick="window.location.href='doa.html'">Doe Agora</button>
@@ -250,6 +246,29 @@
         </div>
     </div>
 
+    <div id="modalGerenciarUsuario" class="modal">
+        <div class="modal-content">
+            <span class="fechar">&times;</span>
+            <h2>Gerenciar Perfil</h2>
+            <form id="formGerenciarUsuario">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="tel" name="telefone" required>
+                </div>
+                <button type="submit" class="btn-destaque">Atualizar Dados</button>
+                <button type="button" class="btn-deletar" onclick="deletarUsuario()">Deletar Conta</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         const modalVoluntario = document.getElementById("modalVoluntario");
         const btnFechar = document.getElementsByClassName("fechar")[0];
@@ -370,25 +389,6 @@
 
 
         startAutoSlide();
-
-        closeVideo.addEventListener('click', () => {
-            // Animação de encolhimento
-            videoContainer.style.transform = 'scale(0)';
-            
-            setTimeout(() => {
-                videoContainer.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                secretVideo.pause();
-                secretVideo.currentTime = 0;  // Volta pro início
-                videoContainer.style.transform = 'scale(1)';
-            }, 500);
-        });
-
-
-        secretVideo.style.width = '100vw';
-        secretVideo.style.height = '100vh';
-        secretVideo.style.objectFit = 'cover';
-
         function abrirModalPontos() {
             const modal = document.getElementById("modalPontos");
             modal.style.display = "block";
@@ -659,6 +659,173 @@
             localStorage.removeItem('pontosTotal');
             localStorage.removeItem('tarefasCompletas');
         });
+
+        function abrirModalGerenciarUsuario() {
+            const modal = document.getElementById("modalGerenciarUsuario");
+            modal.style.display = "block";
+            
+            // Busca os dados do usuário
+            fetch('php/gerenciar_usuario.php', {
+                method: 'POST',
+                body: new FormData(document.getElementById('formGerenciarUsuario'))
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    document.querySelector('[name="nome"]').value = data.nome;
+                    document.querySelector('[name="email"]').value = data.email;
+                    document.querySelector('[name="telefone"]').value = data.telefone;
+                }
+            });
+        }
+
+        document.getElementById('formGerenciarUsuario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            formData.append('acao', 'atualizar');
+            
+            fetch('php/gerenciar_usuario.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.erro) {
+                    alert('Ops! Algo deu errado: ' + data.erro);
+                } else {
+                    alert('Dados atualizados com sucesso! 🎉');
+                    document.getElementById('modalGerenciarUsuario').style.display = "none";
+                }
+            });
+        });
+
+        function deletarUsuario() {
+            if (confirm('Tem certeza que quer deletar sua conta? Essa ação não pode ser desfeita! 😱')) {
+                const formData = new FormData();
+                formData.append('acao', 'deletar');
+                formData.append('id_usuario', /* aqui vai o ID do usuário logado */);
+                
+                fetch('php/gerenciar_usuario.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        alert('Ops! Algo deu errado: ' + data.erro);
+                    } else {
+                        alert('Conta deletada com sucesso! Até a próxima! 👋');
+                        window.location.href = 'index.html'; // Redireciona pra home
+                    }
+                });
+            }
+        }
+
+        // Modifica o botão de login pra abrir o modal quando logado
+        document.querySelector('.login').onclick = function(e) {
+            e.preventDefault(); // Previne o redirecionamento padrão
+            
+            // Por enquanto, vamo sempre abrir o modal pra testar
+            console.log("Botão de login clicado!");
+            abrirModalGerenciarUsuario();
+            
+            /* Depois você implementa a lógica de verificação de login
+            const usuarioLogado = localStorage.getItem('usuarioLogado');
+            
+            if (usuarioLogado) {
+                abrirModalGerenciarUsuario();
+            } else {
+                window.location.href = 'entrar.html';
+            }
+            */
+        };
+
+        // Adiciona CSS necessário pro modal
+        const style = document.createElement('style');
+        style.textContent = `
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 500px;
+                border-radius: 8px;
+            }
+
+            .fechar {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .fechar:hover {
+                color: black;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            .btn-destaque {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+
+            .btn-deletar {
+                background-color: #f44336;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Adiciona função pra fechar o modal
+        document.querySelector('#modalGerenciarUsuario .fechar').onclick = function() {
+            document.getElementById('modalGerenciarUsuario').style.display = "none";
+        };
+
+        // Fecha o modal quando clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalGerenciarUsuario');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
 
     </script>
 
