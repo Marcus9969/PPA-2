@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-logo">
-            <img src="imgs/logo.png" alt="Prato Cheio Logo">
+            <img onclick="abrirModalGerenciarUsuario()" src="imgs/logo.png" alt="Prato Cheio Logo">
         </div>
         <div class="nav-links">
             <span class="pontos-display">Seus Pontos: 0</span>
@@ -723,7 +723,7 @@
         }
 
         // Modifica o botão de login pra abrir o modal quando logado
-        document.querySelector('.login').onclick = function(e) {
+        document.querySelector('imgs/Prato_Cheio2-removebg-preview.png').onclick = function(e) {
             e.preventDefault(); // Previne o redirecionamento padrão
             
             // Por enquanto, vamo sempre abrir o modal pra testar
