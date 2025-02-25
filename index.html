@@ -10,13 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="imgs/favicon-96x96-removebg-preview.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">    
 
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-logo">
-            <img onclick="abrirModalGerenciarUsuario()" src="imgs/logo.png" alt="Prato Cheio Logo">
+            <a href="editarUser.html"> <img src="imgs/logo.png" alt="Prato Cheio Logo" class="logo-img"></a>
         </div>
         <div class="nav-links">
             <span class="pontos-display">Seus Pontos: 0</span>
@@ -660,172 +660,7 @@
             localStorage.removeItem('tarefasCompletas');
         });
 
-        function abrirModalGerenciarUsuario() {
-            const modal = document.getElementById("modalGerenciarUsuario");
-            modal.style.display = "block";
-            
-            // Busca os dados do usuário
-            fetch('php/gerenciar_usuario.php', {
-                method: 'POST',
-                body: new FormData(document.getElementById('formGerenciarUsuario'))
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.erro) {
-                    document.querySelector('[name="nome"]').value = data.nome;
-                    document.querySelector('[name="email"]').value = data.email;
-                    document.querySelector('[name="telefone"]').value = data.telefone;
-                }
-            });
-        }
-
-        document.getElementById('formGerenciarUsuario').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            formData.append('acao', 'atualizar');
-            
-            fetch('php/gerenciar_usuario.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.erro) {
-                    alert('Ops! Algo deu errado: ' + data.erro);
-                } else {
-                    alert('Dados atualizados com sucesso! 🎉');
-                    document.getElementById('modalGerenciarUsuario').style.display = "none";
-                }
-            });
-        });
-
-        function deletarUsuario() {
-            if (confirm('Tem certeza que quer deletar sua conta? Essa ação não pode ser desfeita! 😱')) {
-                const formData = new FormData();
-                formData.append('acao', 'deletar');
-                formData.append('id_usuario', /* aqui vai o ID do usuário logado */);
-                
-                fetch('php/gerenciar_usuario.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.erro) {
-                        alert('Ops! Algo deu errado: ' + data.erro);
-                    } else {
-                        alert('Conta deletada com sucesso! Até a próxima! 👋');
-                        window.location.href = 'index.html'; // Redireciona pra home
-                    }
-                });
-            }
-        }
-
-        // Modifica o botão de login pra abrir o modal quando logado
-        document.querySelector('imgs/Prato_Cheio2-removebg-preview.png').onclick = function(e) {
-            e.preventDefault(); // Previne o redirecionamento padrão
-            
-            // Por enquanto, vamo sempre abrir o modal pra testar
-            console.log("Botão de login clicado!");
-            abrirModalGerenciarUsuario();
-            
-            /* Depois você implementa a lógica de verificação de login
-            const usuarioLogado = localStorage.getItem('usuarioLogado');
-            
-            if (usuarioLogado) {
-                abrirModalGerenciarUsuario();
-            } else {
-                window.location.href = 'entrar.html';
-            }
-            */
-        };
-
-        // Adiciona CSS necessário pro modal
-        const style = document.createElement('style');
-        style.textContent = `
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1000;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0,0,0,0.5);
-            }
-
-            .modal-content {
-                background-color: #fefefe;
-                margin: 15% auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%;
-                max-width: 500px;
-                border-radius: 8px;
-            }
-
-            .fechar {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .fechar:hover {
-                color: black;
-            }
-
-            .form-group {
-                margin-bottom: 15px;
-            }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 5px;
-            }
-
-            .form-group input {
-                width: 100%;
-                padding: 8px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-            }
-
-            .btn-destaque {
-                background-color: #4CAF50;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                margin-right: 10px;
-            }
-
-            .btn-deletar {
-                background-color: #f44336;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Adiciona função pra fechar o modal
-        document.querySelector('#modalGerenciarUsuario .fechar').onclick = function() {
-            document.getElementById('modalGerenciarUsuario').style.display = "none";
-        };
-
-        // Fecha o modal quando clicar fora
-        window.onclick = function(event) {
-            const modal = document.getElementById('modalGerenciarUsuario');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
+    
 
     </script>
 
